@@ -8,14 +8,16 @@ import Item from "./Item";
 // MÉTODOS: Listado no requiere de métodos.
 // PROPS: Listado recibe el método para aumentar el estado de App y se lo pasa a cada uno de sus hijos.
 
-export default function Listado({ list }) {
+export default function Listado({list, eventoComprar}) {
   return (
     <div className="container">
       {list.map(({ id, producto , stock }) => (
-        <Item key={id} 
+        <Item key={id}
+            id={id}
             title={producto.nombre}
             description={producto.descripcion}
             stock={stock}
+            eventoComprar={eventoComprar}
           />
       ))}
     </div>
