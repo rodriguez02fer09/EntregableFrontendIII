@@ -6,7 +6,7 @@
 // PROPS: App deberá pasar por props lo necesario a sus componenetes internos.
 import Cabecera from "./components/Cabecera"
 import Listado from "./components/Listado"
-import React from "react";
+import React, { useState } from "react";
 
 const lista = [
   {
@@ -34,11 +34,31 @@ const lista = [
     "stock": 3
   }
 ]
+
 function App() {
+  const [count, setCount] = useState(0)//cabecera
+  const [items, setItems] = useState(lista)//items
+
+  function comprar(event, id){//cantidad de productos
+    const currentCount = count+1
+    setCount(currentCount)
+    
+
+    const newItems = items.map((item) => {//stock de items
+      if(item.id === id){
+        item.stock = item.stock - 1
+      }
+      return item
+    })
+
+    setItems(newItems)
+
+  }
+
   return (
     <div className="App">
-      <Cabecera />
-      <Listado list={lista}  />
+      <Cabecera  cantidad={count} />
+      <Listado list={items} eventoComprar={comprar} />
     </div>
   );
 }
